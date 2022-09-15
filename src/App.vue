@@ -13,9 +13,9 @@
             <div :class="{'bg-accent': userMenuOpen, 'bg-black rounded-b-3xl': !userMenuOpen}"
               class="absolute top-0 mt-6 mx-6 w-[calc(100%-46px)] flex rounded-t-3xl h-12 p-0">
               <div class="mr-auto m-1">
-                <a class="cursor-pointer">
+                <router-link to="/" class="cursor-pointer">
                   <img src="/logo.png" alt="" class="h-10">
-                </a>
+                </router-link>
               </div>
               <div class="ml-auto m-1">
                 <a @click="loggedIn ? userMenuOpen =! userMenuOpen : ''" class="cursor-pointer">
@@ -26,7 +26,7 @@
                 <div class="btn btn-ghost rounded-3xl">
                   Profile
                 </div>
-                <div class="btn rounded-3xl" @click="logout">
+                <div class="btn rounded-3xl" @click="() => { userMenuOpen = false; logout();}">
                   <ArrowRightOnRectangleIcon class="h-6" /> Logout
                 </div>
               </div>
@@ -72,7 +72,7 @@
 
 <script setup>
 
-import { ref, inject, onMounted } from 'vue'
+import { ref, inject, onUpdated } from 'vue'
 import { pocketBaseSymbol } from './symbols/injectionSymbols';
 import { UserCircleIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { useRoute, useRouter } from 'vue-router';
@@ -94,7 +94,7 @@ const userMenuOpen = ref(false)
  * Initializations
  */ 
 
-onMounted(() => {
+onUpdated(() => {
   checkLogin()
 })
 

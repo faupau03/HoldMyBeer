@@ -1,5 +1,9 @@
 <template>
-    <!-- Simple login form. Show warning text if inputs are empty or not correctly filled. -->
+    
+    <div class="md:flex grid justify-between w-full">
+        <img src="/bar.png" alt="" class="h-96 rounded-3xl shadow-2xl md:block hidden">
+        <img src="/bar.png" alt="" class="h-56 rounded-3xl shadow-2xl md:hidden mx-auto mt-20">
+        <!-- Simple login form. Show warning text if inputs are empty or not correctly filled. -->
     <form @submit.prevent="login()" class="m-8">
         <div class="flex flex-col gap-4">
             <span class="text-3xl font-bold">Login</span>
@@ -33,6 +37,9 @@
             </div>
         </div>
     </form>
+    </div>
+
+    
 </template>
 
 <script setup lang="ts">
