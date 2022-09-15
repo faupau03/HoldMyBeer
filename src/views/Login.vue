@@ -17,7 +17,7 @@
                 <input v-model="pw" class="input input-bordered invalid:input-warning" type="password"
                     placeholder="Password" required />
                 <!-- link to reset password -->
-                <router-link to="/reset-password" class="link">Forgot password?</router-link>
+                <router-link to="/password-reset" class="link">Forgot password?</router-link>
             </div>
             <div class="flex gap-2">
                 <button class="btn btn-primary">Login</button>

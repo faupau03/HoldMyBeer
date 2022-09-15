@@ -14,7 +14,8 @@
 
 
             <!-- Navbar -->
-            <div :class="{'bg-accent': userMenuOpen, 'bg-black rounded-b-3xl': !userMenuOpen}" class="absolute top-0 mt-0 mx-6 w-[calc(100%-46px)] flex rounded-t-3xl h-12 p-0">
+            <div :class="{'bg-accent': userMenuOpen, 'bg-black rounded-b-3xl': !userMenuOpen}"
+              class="absolute top-0 mt-0 mx-6 w-[calc(100%-46px)] flex rounded-t-3xl h-12 p-0">
               <div class="mr-auto m-1">
                 <a class="cursor-pointer">
                   <img src="/logo.png" alt="" class="h-10">
@@ -30,16 +31,16 @@
                   Profile
                 </div>
                 <div class="btn rounded-3xl" @click="logout">
-                  <ArrowRightOnRectangleIcon class="h-6"/> Logout
+                  <ArrowRightOnRectangleIcon class="h-6" /> Logout
                 </div>
               </div>
             </div>
-            
+
 
 
             <router-view></router-view>
 
-            
+
 
 
             <!-- Bottom navigation -->
@@ -102,6 +103,10 @@ onMounted(() => {
   checkLogin()
 })
 
+/*
+ * Methods
+ */
+
 const checkLogin = async () => {
   if ($pb?.authStore.isValid) {
     loggedIn.value = true
@@ -114,17 +119,17 @@ const checkLogin = async () => {
   }
 }
 
-  const logout = async() => {
-    console.log("logout");
-    // Try to logout via pocketbase api
-    try {
-      const res = $pb?.authStore.clear();
-      loggedIn.value = false
-      checkLogin();
-    }
-    catch (error) {
-      console.log(error);
-      console.log("Logout failed");
-    }
-  };
+const logout = async() => {
+  console.log("logout");
+  // Try to logout via pocketbase api
+  try {
+    const res = $pb?.authStore.clear();
+    loggedIn.value = false
+    checkLogin();
+  }
+  catch (error) {
+    console.log(error);
+    console.log("Logout failed");
+  }
+};
 </script>

@@ -5,7 +5,8 @@ import About from './views/About.vue'
 import NotFound from './views/NotFound.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
-import ResetPassword from './views/ResetPassword.vue'
+import PasswordReset from './views/PasswordReset.vue'
+import ConfirmPasswordReset from './views/ConfirmPasswordReset.vue'
 
 // All paths for the app
 const routes = [
@@ -14,7 +15,8 @@ const routes = [
     { path: '/about', component: About },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/reset-password', component: ResetPassword },
+    { path: '/password-reset', component: PasswordReset },
+    { path: '/confirm-password-reset', component: ConfirmPasswordReset },
     { path: '/:pathMatch(.*)*', component: NotFound },
 ]
 
