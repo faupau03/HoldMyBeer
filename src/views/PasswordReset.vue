@@ -25,7 +25,7 @@
         </div>
     </form>
     <div v-show="requestResetSuccess" class="absolute top-0 left-0 h-full w-full flex justify-center items-center">
-        <div class="grid text-center bg-base-200 py-8 rounded-3xl m-4 shadow-2xl p-2">
+        <div class="grid text-center bg-accent p-8 rounded-3xl m-4 shadow-2xl p-2">
             <div class="text-3xl font-bold">Reset request send</div>
             <div class="text-xl">Please check your emails.</div>
             <div @click="router.push('/login')" class="btn btn-secondary w-40 mx-auto">

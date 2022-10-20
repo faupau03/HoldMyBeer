@@ -7,6 +7,10 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import PasswordReset from './views/PasswordReset.vue'
 import ConfirmPasswordReset from './views/ConfirmPasswordReset.vue'
+import Redirect from './views/Redirect.vue'
+
+// Template views
+import VerificationTemplate from './views/VerificationTemplate.vue'
 
 // All paths for the app
 const routes = [
@@ -17,6 +21,8 @@ const routes = [
     { path: '/register', component: Register },
     { path: '/password-reset', component: PasswordReset },
     { path: '/confirm-password-reset', component: ConfirmPasswordReset },
+    { path: '/templates/verification', component: VerificationTemplate },
+    { path: '/redirect', component: Redirect },
     { path: '/:pathMatch(.*)*', component: NotFound },
 ]
 

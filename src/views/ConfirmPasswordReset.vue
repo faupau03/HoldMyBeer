@@ -7,15 +7,33 @@
                 <label class="label">
                     <span class="label-text text-base-content">Password</span>
                 </label>
-                <input v-model="pw" class="input input-bordered invalid:input-warning" type="password"
-                    placeholder="Password" required />
+                <div class="relative w-min">
+                    <input v-model="pw" @input="checkPasswordEquality" ref="pwInput"
+                        class="input input-bordered invalid:input-warning" :type="showPassword ? 'text' : 'password'"
+                        placeholder="Password" required minlength="8" maxlength="100" autocomplete="new-password" />
+                    <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+                        <button @click="togglePassword" class="p-3 rounded-r-lg hover:bg-base-200 bg-accent/70 hover:bg-accent" type="button">
+                            <EyeIcon v-show="!showPassword" class="h-6" />
+                            <EyeSlashIcon v-show="showPassword" class="h-6" />
+                        </button>
+                    </span>
+                </div>
             </div>
             <div class="flex flex-col">
                 <label class="label">
                     <span class="label-text text-base-content">Password Confirmation</span>
                 </label>
-                <input v-model="pwConfirm" class="input input-bordered invalid:input-warning" type="password"
-                    placeholder="Password" required />
+                <div class="relative w-min">
+                    <input v-model="pwConfirm" @input="checkPasswordEquality" ref="pwConfirmInput"
+                        class="input input-bordered invalid:input-warning" :type="showPassword ? 'text' : 'password'"
+                        placeholder="Password" required minlength="8" maxlength="100" autocomplete="new-password" />
+                    <span class="absolute inset-y-0 right-0 flex items-center pl-2">
+                        <button @click="togglePassword" class="p-3 rounded-r-lg hover:bg-base-200 bg-accent/70 hover:bg-accent" type="button">
+                            <EyeIcon v-show="!showPassword" class="h-6" />
+                            <EyeSlashIcon v-show="showPassword" class="h-6" />
+                        </button>
+                    </span>
+                </div>
             </div>
             <!-- info box to show if field not field properly or data is invalid -->
             <div v-if="invalid" class="alert alert-error">
@@ -32,7 +50,7 @@
         </div>
     </form>
     <div v-show="resetSuccess" class="absolute top-0 left-0 h-full w-full flex justify-center items-center">
-        <div class="grid text-center bg-base-200 py-8 rounded-3xl m-4 shadow-2xl p-2">
+        <div class="grid text-center bg-accent py-8 rounded-3xl m-4 shadow-2xl p-2">
             <div class="text-3xl font-bold">Reset successful</div>
             <div class="text-xl">You can now log in.</div>
             <div @click="router.push('/login')" class="btn btn-secondary w-40 mx-auto">
@@ -48,6 +66,11 @@ import { pocketBaseSymbol } from '../symbols/injectionSymbols';
 import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
 
+// Import icons from heroicons
+import { EyeIcon } from '@heroicons/vue/24/outline'
+import { EyeSlashIcon } from '@heroicons/vue/24/outline'
+
+
 const router = useRouter();
 const route = useRoute();
 
@@ -57,6 +80,17 @@ const pw = ref('');
 const pwConfirm = ref('');
 const invalid = ref(false)
 const resetSuccess = ref(false)
+
+const showPassword = ref(false)
+
+// Elements
+const pwInput = ref()
+const pwConfirmInput = ref()
+
+
+const togglePassword = () => {
+    showPassword.value = !showPassword.value
+}
 
 onMounted(() => {
     if (!route.query.token) {
@@ -81,4 +115,15 @@ const resetPassword = async() => {
         console.log("Reset request failed");
     }
 };
+
+const checkPasswordEquality = () => {
+    if (pw.value !== pwConfirm.value) {
+        pwInput.value.setCustomValidity('Passwords must match');
+        pwConfirmInput.value.setCustomValidity('Passwords must match');
+    }
+    else {
+        pwInput.value.setCustomValidity('');
+        pwConfirmInput.value.setCustomValidity('');
+    }
+}
 </script>
